@@ -137,6 +137,7 @@
           ./nix/ext/wrappers/default.nix
           ./nix/ext/supautils.nix
           ./nix/ext/plv8.nix
+          ./nix/ext/oracle_fdw.nix
         ];
 
         #Where we import and build the orioledb extension, we add on our custom extensions
@@ -860,6 +861,8 @@
           ];
           shellHook = ''
             export HISTFILE=.history
+            export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath [pkgs.oracle-instantclient]}
+            export ORACLE_HOME=${pkgs.oracle-instantclient};
           '';
         };
         cargo-pgrx_0_11_3 = mkCargoPgrxDevShell {
