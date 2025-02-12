@@ -25,23 +25,16 @@ stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
-    echo "===Installing phase==="
     mkdir -p $out/{lib,share/postgresql/extension}
-
     cp *${postgresql.dlSuffix}      $out/lib
-    echo ${postgresql.dlSuffix}
-
-
     cp sql/*.sql $out/share/postgresql/extension
     cp *.sql $out/share/postgresql/extension
     cp *.control $out/share/postgresql/extension
-    exit 1
-
   '';
 
   meta = with lib; {
-    description = "Async networking for Postgres";
-    homepage = "https://github.com/supabase/pg_net";
+    description = "Foreign Data Wrapper for Oracle";
+    homepage = "https://github.com/laurenz/oracle_fdw";
     maintainers = with maintainers; [ samrose ];
     platforms = postgresql.meta.platforms;
     license = licenses.postgresql;
